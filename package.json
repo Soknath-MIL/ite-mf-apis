@@ -16,5 +16,8 @@
     "mirrorfly-sdk": "^4.25.1",
     "mock-local-storage": "^1.1.24",
     "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }
