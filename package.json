@@ -1,7 +1,7 @@
 {
   "name": "ite-mf-apis",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.19.2"
+    "crypto-js": "^4.2.0",
+    "express": "^4.19.2",
+    "jsdom": "^24.1.0",
+    "mirrorfly-sdk": "^4.25.1",
+    "mock-local-storage": "^1.1.24",
+    "nodemon": "^3.1.4"
   }
 }
