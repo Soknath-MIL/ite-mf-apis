@@ -14,28 +14,23 @@ function initBrowser() {
 
   // Set global variables for the jsdom environment
   global.window = window;
-  global.wn = window;
   global.document = window.document;
   global.navigator = window.navigator;
   global.XMLHttpRequest = window.XMLHttpRequest;
-  global.localStorage = window.localStorage = {
-    getItem: function (key) {
-      return this[key];
-    },
-    setItem: function (key, value) {
-      this[key] = value.toString();
-    },
-    removeItem: function (key) {
-      delete this[key];
-    },
-    clear: function () {
-      for (let key in this) {
-        if (this.hasOwnProperty(key)) {
-          delete this[key];
-        }
-      }
-    }
-  };
+
+  // Define a basic localStorage
+  const localStorageMock = (() => {
+    let store = {};
+    return {
+      getItem: key => store[key] || null,
+      setItem: (key, value) => store[key] = value.toString(),
+      removeItem: key => delete store[key],
+      clear: () => store = {}
+    };
+  })();
+
+  global.localStorage = localStorageMock;
+
   return dom;
 }
 
@@ -80,7 +75,7 @@ app.get("/register", async (req, res) => {
 
     // Connect user
     const { username: sdkUsername, password } = response.data;
-    await SDK.connect(sdkUsername, password);
+    await SDK.connect(sdkUsername, password).then(res => console.log(res));
     console.log("Connected successfully.");
 
     // Update user profile
