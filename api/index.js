@@ -123,7 +123,7 @@ app.get("/createMeetingLink", async (req, res) => {
           let links = {};
           data.users.split(",").map((each) => {
             let ecytData = encryptAES(JSON.stringify({ ...data, uid: each }), "meetingData");
-            links[each] = `${meetLink}?action=meeting&data=${ecytData}`;
+            links[each] = `${meetLink}?action=meeting&data=${ecytData}&openExternalBrowser=1`;
           });
           return res.json({
             statusCode: 200,
